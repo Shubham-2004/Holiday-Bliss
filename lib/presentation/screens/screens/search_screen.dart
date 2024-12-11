@@ -30,8 +30,7 @@ class _SearchScreenState extends State<SearchScreen> {
     try {
       final String apiEndpoint =
           'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
-      const String apiKey =
-          'AIzaSyCdBrP8GOaGjQgdX1RYOJnHo4xm8D61lmQ'; // Replace with your API key
+      const String apiKey = 'AIzaSyCdBrP8GOaGjQgdX1RYOJnHo4xm8D61lmQ';
 
       final requestBody = json.encode({
         "contents": [
@@ -83,7 +82,6 @@ class _SearchScreenState extends State<SearchScreen> {
     }
   }
 
-  // Function to show form for entering hotel preferences after city input
   void _showPreferencesForm(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -118,7 +116,6 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  // Function to show preferences form after city name is entered
   void _showHotelDetailsForm(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -161,7 +158,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       priorities!,
                       guests!,
                     );
-                    Navigator.pop(context); // Close preferences form
+                    Navigator.pop(context);
                   }
                 },
                 child: const Text('Search Hotels'),
@@ -177,14 +174,6 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            )),
         backgroundColor: Colors.black87,
         title: const Text(
           'Search Hotels',

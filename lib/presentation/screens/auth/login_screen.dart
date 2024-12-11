@@ -11,8 +11,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
   bool _isLoading = false;
 
   Future<void> _login() async {
@@ -100,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       labelText: 'Email',
                       labelStyle:
-                          TextStyle(color: Colors.teal), // Teal label color
+                          TextStyle(color: Colors.white), // Teal label color
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -114,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       labelText: 'Password',
                       labelStyle:
-                          TextStyle(color: Colors.teal), // Teal label color
+                          TextStyle(color: Colors.white), // Teal label color
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -155,13 +153,12 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SignInPage()),
+                                builder: (context) => SignupPage()),
                           );
                         },
                         child: Text(
                           'Sign up',
-                          style: TextStyle(
-                              color: Colors.teal), // Teal color for the link
+                          style: TextStyle(color: Colors.teal),
                         ),
                       ),
                     ],

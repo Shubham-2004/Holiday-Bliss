@@ -1,41 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:holiday_bliss/presentation/screens/auth/login_screen.dart';
-import 'package:holiday_bliss/presentation/screens/auth/signup_screen.dart';
-import 'package:holiday_bliss/presentation/screens/home_screens.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SignInPage extends StatefulWidget {
+class SignupPage extends StatefulWidget {
   @override
-  _SignInPageState createState() => _SignInPageState();
+  _SignupPageState createState() => _SignupPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignupPageState extends State<SignupPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
   bool _isLoading = false;
 
-  Future<void> _signin() async {
+  Future<void> _signup() async {
     setState(() {
       _isLoading = true;
     });
 
     try {
-      final AuthResponse response =
-          await Supabase.instance.client.auth.signInWithPassword(
+      final AuthResponse response = await Supabase.instance.client.auth.signUp(
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
 
-      if (response.session != null) {
-        // Sign in successful
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+      if (response.user != null) {
+        // Signup successful
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+                'Signup successful! Please check your email to confirm your account.'),
+            backgroundColor: Colors.green,
+          ),
         );
+        Navigator.pop(context);
       } else {
         // Show error message
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Sign in failed')),
+          SnackBar(content: Text('Signup failed')),
         );
       }
     } on AuthException catch (e) {
@@ -64,19 +66,20 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Sign In',
+          'Sign Up',
           style: TextStyle(
               color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black, // Teal app bar
+        automaticallyImplyLeading: false, // Disable back button
       ),
-      backgroundColor:
-          const Color.fromARGB(221, 82, 77, 77), // Blackish background
+      backgroundColor: const Color.fromARGB(
+          221, 82, 77, 77), // Set the background color to black
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Card(
-            color: Colors.black26,
+            color: Colors.black26, // Card background color to black
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -86,73 +89,80 @@ class _SignInPageState extends State<SignInPage> {
               child: Column(
                 children: [
                   Text(
-                    'Sign in to your account',
+                    'Create an account',
                     style: TextStyle(
                         color: Colors.white, // White text color
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 20),
-                  // Email Field
-
                   TextField(
-                    style: TextStyle(color: Colors.white), // White text color
+                    controller: _firstNameController,
                     decoration: InputDecoration(
                       labelText: 'First Name',
                       labelStyle:
-                          TextStyle(color: Colors.teal), // Teal label color
+                          TextStyle(color: Colors.white), // White label text
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
+                        borderSide:
+                            BorderSide(color: Colors.white), // White border
                       ),
                     ),
-                    keyboardType: TextInputType.emailAddress,
+                    style:
+                        TextStyle(color: Colors.white), // White text in input
                   ),
                   SizedBox(height: 12),
+
+                  // Last Name Field
                   TextField(
-                    style: TextStyle(color: Colors.white), // White text color
+                    controller: _lastNameController,
                     decoration: InputDecoration(
                       labelText: 'Last Name',
-                      labelStyle:
-                          TextStyle(color: Colors.teal), // Teal label color
+                      labelStyle: TextStyle(color: Colors.white),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: Colors.white),
                       ),
                     ),
-                    keyboardType: TextInputType.emailAddress,
+                    style: TextStyle(color: Colors.white),
                   ),
                   SizedBox(height: 12),
+
+                  // Email Field
                   TextField(
                     controller: _emailController,
-                    style: TextStyle(color: Colors.white), // White text color
                     decoration: InputDecoration(
                       labelText: 'Email',
-                      labelStyle:
-                          TextStyle(color: Colors.teal), // Teal label color
+                      labelStyle: TextStyle(color: Colors.white),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: Colors.white),
                       ),
                     ),
                     keyboardType: TextInputType.emailAddress,
+                    style: TextStyle(color: Colors.white),
                   ),
                   SizedBox(height: 12),
+
                   // Password Field
                   TextField(
                     controller: _passwordController,
-                    style: TextStyle(color: Colors.white), // White text color
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      labelStyle:
-                          TextStyle(color: Colors.teal), // Teal label color
+                      labelStyle: TextStyle(color: Colors.white),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: Colors.white),
                       ),
                     ),
                     obscureText: true,
+                    style: TextStyle(color: Colors.white),
                   ),
                   SizedBox(height: 20),
-                  // Sign In Button
+
+                  // Sign Up Button
                   ElevatedButton(
-                    onPressed: _isLoading ? null : _signin,
+                    onPressed: _isLoading ? null : _signup,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal,
                       padding:
@@ -166,32 +176,26 @@ class _SignInPageState extends State<SignInPage> {
                             color: Colors.white,
                           )
                         : Text(
-                            'Sign In',
+                            'Sign up',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                   ),
                   SizedBox(height: 12),
-                  // Link to Sign Up Page
+
+                  // Link to Login Page
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Don\'t have an account?',
-                        style:
-                            TextStyle(color: Colors.white), // White text color
+                        'Already have an account?',
+                        style: TextStyle(color: Colors.white), // White text
                       ),
                       TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage()),
-                          );
-                        },
+                        onPressed: () => Navigator.pop(context),
                         child: Text(
-                          'Sign up',
+                          'Login',
                           style: TextStyle(
-                              color: Colors.teal), // Teal color for the link
+                              color: Colors.teal), // Teal color for "Login"
                         ),
                       ),
                     ],

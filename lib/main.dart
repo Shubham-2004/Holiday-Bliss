@@ -18,32 +18,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        highlightColor: Colors.teal,
-        primarySwatch: Colors.teal, // Set the primary color to teal
-        hintColor: Colors.teal, // Set the accent color to teal
-        buttonTheme: ButtonThemeData(
-          buttonColor: Colors.teal, // Buttons will have teal color
-        ),
-        scaffoldBackgroundColor: Colors.black87, // Set background color
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.black, // AppBar will have black background
-          titleTextStyle: TextStyle(
-              color: Colors.white, // Title text color will be white
-              fontSize: 25,
-              fontWeight: FontWeight.bold),
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.teal, // TextButton link color will be teal
-          ),
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          labelStyle: TextStyle(color: Colors.teal), // Label text will be teal
-          border: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Colors.teal), // Border color for inputs
-          ),
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        useMaterial3: true,
       ),
       home: LoginPage(),
     );
