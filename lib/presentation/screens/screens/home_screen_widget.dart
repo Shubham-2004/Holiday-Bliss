@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:holiday_bliss/presentation/screens/eventplanner/event_plan_ai_screen.dart';
+import 'package:holiday_bliss/presentation/screens/screens/holiday_chat_screen.dart';
+import 'package:holiday_bliss/presentation/screens/screens/plan_screen.dart';
+import 'package:holiday_bliss/presentation/screens/screens/search_screen.dart';
 import 'package:holiday_bliss/widgets/buttons/homescreen_button.dart';
-import 'package:holiday_bliss/widgets/city_card.dart';
 import 'package:holiday_bliss/widgets/city_slider.dart';
 import 'package:holiday_bliss/widgets/hotels_launcher.dart';
 
@@ -45,11 +47,19 @@ class HomeScreenContent extends StatelessWidget {
               children: [
                 CustomButton(
                   label: 'Hotels',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SearchScreen()));
+                  },
                 ),
                 CustomButton(
                   label: 'Things To Do',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => PlanScreen()));
+                  },
                 ),
               ],
             ),
@@ -59,7 +69,12 @@ class HomeScreenContent extends StatelessWidget {
               children: [
                 CustomButton(
                   label: 'Restaurants',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SearchScreen()));
+                  },
                 ),
                 CustomButton(
                   label: 'Forums',
@@ -152,6 +167,93 @@ class HomeScreenContent extends StatelessWidget {
                           ),
                           child: const Text(
                             "Start a trip with AI",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Stack(
+                children: [
+                  Container(
+                    height: 400,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          'https://wallpapercave.com/wp/wp4083242.jpg',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 25,
+                    left: 20,
+                    right: 20,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Find Perfect Holiday Gifts",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 23,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 140),
+                          child: Text(
+                            "Spread joy this holiday season with personalized gifts \nand memorable experiences for your loved ones.",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: Colors.teal,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18,
+                              height: 1.5,
+                              shadows: [
+                                Shadow(
+                                  offset: Offset(1, 1),
+                                  blurRadius: 3,
+                                  color: Colors.white54,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChatPage(),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.teal,
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 12,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                          child: const Text(
+                            "Explore AI Holiday Picks",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

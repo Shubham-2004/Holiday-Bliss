@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:holiday_bliss/presentation/screens/screens/account_screen.dart'; // Assuming you have a separate content widget
+
 import 'package:holiday_bliss/presentation/screens/screens/home_screen_widget.dart';
 import 'package:holiday_bliss/presentation/screens/screens/plan_screen.dart';
 import 'package:holiday_bliss/presentation/screens/screens/review_screen.dart';
 import 'package:holiday_bliss/presentation/screens/screens/search_screen.dart';
-import 'package:holiday_bliss/widgets/buttons/homescreen_button.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
     const SearchScreen(),
     const PlanScreen(),
     const ReviewScreen(),
-    const AccountScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -57,10 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.feedback),
             label: 'Review',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Account',
           ),
         ],
         onTap: _onItemTapped,

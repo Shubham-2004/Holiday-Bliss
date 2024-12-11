@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:holiday_bliss/presentation/screens/auth/login_screen.dart';
+import 'package:holiday_bliss/presentation/screens/splash_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
-      home: LoginPage(),
+      home: SplashScreen(),
     );
   }
 }

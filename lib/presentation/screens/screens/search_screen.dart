@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:holiday_bliss/presentation/screens/screens/live_location_screen.dart';
 import 'package:http/http.dart' as http;
 
 class SearchScreen extends StatefulWidget {
@@ -122,48 +123,61 @@ class _SearchScreenState extends State<SearchScreen> {
       builder: (BuildContext context) {
         return Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                decoration: const InputDecoration(labelText: 'Budget'),
-                onChanged: (value) => budget = value,
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: 'Trip Purpose'),
-                onChanged: (value) => tripPurpose = value,
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: 'Priorities'),
-                onChanged: (value) => priorities = value,
-              ),
-              TextField(
-                decoration:
-                    const InputDecoration(labelText: 'Number of Guests'),
-                keyboardType: TextInputType.number,
-                onChanged: (value) => guests = int.tryParse(value),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  if (city != null &&
-                      budget != null &&
-                      tripPurpose != null &&
-                      priorities != null &&
-                      guests != null) {
-                    fetchHotelDetails(
-                      city!,
-                      budget!,
-                      tripPurpose!,
-                      priorities!,
-                      guests!,
-                    );
-                    Navigator.pop(context);
-                  }
-                },
-                child: const Text('Search Hotels'),
-              ),
-            ],
+          child: Container(
+            height: 700,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  decoration: const InputDecoration(labelText: 'Budget'),
+                  onChanged: (value) => budget = value,
+                ),
+                TextField(
+                  decoration: const InputDecoration(labelText: 'Trip Purpose'),
+                  onChanged: (value) => tripPurpose = value,
+                ),
+                TextField(
+                  decoration: const InputDecoration(labelText: 'Priorities'),
+                  onChanged: (value) => priorities = value,
+                ),
+                TextField(
+                  decoration:
+                      const InputDecoration(labelText: 'Number of Guests'),
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) => guests = int.tryParse(value),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    if (city != null &&
+                        budget != null &&
+                        tripPurpose != null &&
+                        priorities != null &&
+                        guests != null) {
+                      fetchHotelDetails(
+                        city!,
+                        budget!,
+                        tripPurpose!,
+                        priorities!,
+                        guests!,
+                      );
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: const Text('Search Hotels'),
+                ),
+                SizedBox(
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image(
+                          height: 100,
+                          width: double.infinity,
+                          image: NetworkImage(
+                              'https://www.ourescapeclause.com/wp-content/uploads/2016/05/shutterstock_1075238006-scaled.jpg')),
+                    ))
+              ],
+            ),
           ),
         );
       },
@@ -175,9 +189,26 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
-        title: const Text(
-          'Search Hotels',
-          style: TextStyle(color: Colors.white),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Search Hotels',
+              style: TextStyle(color: Colors.white),
+            ),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LiveLocationPage()));
+                },
+                icon: const Icon(
+                  Icons.location_on,
+                  color: Colors.white,
+                  size: 26,
+                )),
+          ],
         ),
       ),
       backgroundColor: Colors.black,
